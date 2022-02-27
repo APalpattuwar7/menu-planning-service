@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -156,7 +157,6 @@ func (r *Server) MountHandlers() {
 	r.Router.Post("/recipes", addRecipe)
 	r.Router.Put("/recipes", updateRecipe)
 	r.Router.Delete("/recipes/{id}", deleteRecipe)
-
 }
 
 func main() {
@@ -177,6 +177,6 @@ func main() {
 	// 	log.Fatalln(err)
 	// }
 	// db.MustExec(schema)
-
-	http.ListenAndServe(":3000", r)
+	//os.Setenv("PORT", "8000")
+	http.ListenAndServe(":"+os.Getenv("PORT"), r)
 }
